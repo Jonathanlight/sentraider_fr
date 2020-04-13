@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  apache:
+    build: ./docker/build/apache
+    ports:
+      - "8000:80"
+    depends_on:
+      - mysql
+    volumes:
+      - ./docker/etc/apache/virtualhost.conf:/etc/apache2/sites-enabled/000-default.conf:ro
+      - ./docker/etc/php/php.ini:/usr/local/etc/php/php.ini
+      - ./docker/etc/php/php-cli.ini:/usr/local/etc/php/php-cli.ini
+      - ./app/symfony:/var/www/symfony
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./docker/etc/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./data:/data
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sentraider_fr
+
+  phpmyadmin:
+    ports:
+      - "8001:80"
+    image: nazarpc/phpmyadmin
+    depends_on:
+      - mysql
