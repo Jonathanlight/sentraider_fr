@@ -50,3 +50,8 @@
 
 # Embedded web-server pid file
 /.web-server-pid
+.DS_Store
+.idea/
+docker-compose.override.yml
+.gitignore
+data/
