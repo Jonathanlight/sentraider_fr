@@ -52,7 +52,7 @@ composer require lexik/jwt-authentication-bundle
 $ mkdir config/jwt
 $ openssl genrsa -out config/jwt/private.pem -aes256 4096
 $ openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
-Password jwt: AnnaBelle1980F2IArchi
+Password jwt: 543565376YYHD39833
 ```
 
 - Configuring the Bundle

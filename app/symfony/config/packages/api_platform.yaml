@@ -1,7 +1,21 @@
 api_platform:
+    title: Sentraider API
+    version: 1.0.0
+
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
+
+    # Activation graphQl
+    graphql:
+        graphiql:
+            enabled: true
+
+    # Authorization bearer jwt
     swagger:
         versions: [3]
+        api_keys:
+            apiKey:
+                name: Authorization
+                type: header

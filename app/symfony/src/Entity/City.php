@@ -2,9 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"city:read"}},
+ *     denormalizationContext={"groups"={"city:write"}},
+ *     collectionOperations={
+ *      "get"={},
+ *      "post"={},
+ *     },
+ *     itemOperations={
+ *       "get"={},
+ *       "put"={},
+ *       "delete"={},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\CityRepository")
  */
 class City

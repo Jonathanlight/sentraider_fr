@@ -2,9 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ApiResource(
+ *     normalizationContext={"groups"={"help:read"}},
+ *     denormalizationContext={"groups"={"help:write"}},
+ *     collectionOperations={
+ *      "get"={},
+ *      "post"={},
+ *     },
+ *     itemOperations={
+ *       "get"={},
+ *       "put"={},
+ *       "delete"={},
+ *     }
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\HelpRepository")
  */
 class Help

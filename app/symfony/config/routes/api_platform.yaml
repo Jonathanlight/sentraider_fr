@@ -1,4 +1,13 @@
 api_platform:
     resource: .
     type: api_platform
-    prefix: /api
+    prefix: /api/v1
+
+app_swagger_ui:
+    path: /api/fb9870/documentation
+    methods: GET
+    defaults: { _controller: api_platform.swagger.action.ui, area: default }
+
+login:
+    path: /login
+    methods: ['POST']
