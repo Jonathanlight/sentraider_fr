@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Repository\UserRepository;
 use App\Services\PasswordService;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserManager
 {
@@ -63,7 +64,7 @@ class UserManager
     public function registerAccount(User $user)
     {
         if ($this->findByEmail($user->getEmail())) {
-            return 'Cette adresse email a déjà été utilisé.';
+            throw new BadRequestHttpException('Cette adresse email a déjà été utilisé.');
         }
 
         $user->setUsername($user->getEmail());
