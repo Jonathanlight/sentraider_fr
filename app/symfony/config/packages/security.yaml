@@ -1,23 +1,35 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        users_in_memory: { memory: null }
+        user:
+            entity: { class: App\Entity\User , property: email }
+    encoders:
+        App\Entity\User:
+            algorithm: auto
+            cost: 15
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+        api:
+            pattern: ^/api/v1/
+            stateless: true
+            anonymous: true
+            provider: user
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         main:
-            anonymous: lazy
-            provider: users_in_memory
+            anonymous: true
+            json_login:
+                check_path: /login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
 
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/fb9870/documentation, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/users/[0-9]+/enabled, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/, roles: IS_AUTHENTICATED_FULLY }

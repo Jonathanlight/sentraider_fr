@@ -1,7 +1,20 @@
 api_platform:
+    title: "sentraider_fr"
+    version: 0.0.1
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
+
+    #Format
+    formats:
+        jsonld:  ['application/ld+json']
+        jsonhal: ['application/hal+json']
+        xml:     ['application/xml', 'text/xml']
+        json:    ['application/json']
+        yaml:    ['application/x-yaml']
+        csv:     ['text/csv']
+        html:    ['text/html']
+
