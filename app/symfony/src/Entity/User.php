@@ -281,9 +281,9 @@ class User  implements UserInterface
     }
 
     /**
-     * @param string $passwordReset
+     * @param string|null $passwordReset
      */
-    public function setPasswordReset($passwordReset): void
+    public function setPasswordReset(?string $passwordReset): void
     {
         $this->passwordReset = $passwordReset;
     }
