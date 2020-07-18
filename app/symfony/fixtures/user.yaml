@@ -1,8 +1,10 @@
 App\Entity\User:
-  client:
-    email: 'lockpassero@gmail.com'
-    username: 'lockpassero@gmail.com'
+  user{1..10}:
+    username: <freeEmail()>
+    email: <freeEmail()>
     password: 'bonjour'
     role: 'ROLE_USER'
-    active: 1
+    enabled: 1
+    has_validated_cgu: true
+    updated: <dateTime()>
     created: <dateTime()>

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,19 +7,26 @@
     <meta name="author" content="">
     <link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>{% block title %} Welcome {% endblock %}</title>
+    <title>Hello</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{{ asset('assets/css/cover.css') }}" rel="stylesheet">
+    <link href="/assets/css/cover.css" rel="stylesheet">
 
-    {% block stylesheets %}{% endblock %}
+    <style>
+        body {
+            background-image: url("https://wallpaperstock.net/dandelion%2C-flower%2C-flowers-wallpapers_57213_1920x1200.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+
 </head>
 
 <body class="text-center">
-
 {% block body %}{% endblock %}
 
 <!-- Bootstrap core JavaScript -->

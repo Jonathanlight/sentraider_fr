@@ -1,15 +1,29 @@
-App\Entity\Category:
-  categpry_action:
-    name: "Action"
-  categpry_aventure:
-    name: "Aventure"
-  categpry_comedie:
-    name: "Comedie"
-  categpry_dame:
-    name: "Drame"
-  categpry_musical:
-    name: "Musical"
-  categpry_policier:
-    name: "Policier"
-  categpry_thriller:
-    name: "Thriller"
+App\Entity\City:
+  city001:
+    slug: "paris"
+    name: "Paris"
+    created: <dateTime()>
+  city002:
+    slug: "lille"
+    name: "Lille"
+    created: <dateTime()>
+  city003:
+    slug: "marseille"
+    name: "Marseille"
+    created: <dateTime()>
+  city004:
+    slug: "toulouse"
+    name: "Toulouse"
+    created: <dateTime()>
+  city005:
+    slug: "nice"
+    name: "Nice"
+    created: <dateTime()>
+  city006:
+    slug: "angers"
+    name: "Angers"
+    created: <dateTime()>
+  city007:
+    slug: "lyon"
+    name: "Lyon"
+    created: <dateTime()>
