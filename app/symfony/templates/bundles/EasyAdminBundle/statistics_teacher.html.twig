@@ -1,0 +1,72 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="card-body d-sm-flex justify-content-between">
+                <h4 class="mb-2 mb-sm-0 pt-1">
+                    <span>{{ 'page.statistique.title'|trans }} : {{ user.prenom }} {{ user.nom }} </span><br>
+                </h4>
+                <span style="color: black;"> {{ user.email }} </span>
+            </div>
+        </div>
+
+        <div class="card">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+{% endblock %}
+
+{% block body_javascript %}
+    {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var labels_row = {{ toPlainArray(statistiques['created']) }}
+            labels_row.forEach(function(part, index) {
+                var Y = part.toString().substr(0, 4);
+                var m = part.toString().substr(4, 2);
+                var d = part.toString().substr(6, 2);
+
+                this[index] = d+'/'+ m +'/'+Y;
+            }, labels_row);
+
+        var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels_row,
+                datasets: [{
+                    label: 'Stats Views',
+                    data: {{ toPlainArray(statistiques['counterView']) }},
+                    backgroundColor: [
+                        'rgba(255,255,255,0.1)',
+                    ],
+                    borderColor: [
+                        'rgba(10,123,14,0.9)',
+                    ],
+                }]
+            },
+            options: {
+                animation: {
+                    duration: 1.5,
+                    currentStep: 1,
+                    easing: 'linear',
+                },
+                hover: {
+                    animationDuration: 0
+                },
+                responsiveAnimationDuration: 0,
+                scales: {
+                    yAxes: [{
+                        stacked: true,
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            stepSize: 1
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
+{% endblock %}

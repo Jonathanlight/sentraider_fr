@@ -1,0 +1,8 @@
+App\Entity\User:
+  client:
+    email: 'lockpassero@gmail.com'
+    username: 'lockpassero@gmail.com'
+    password: 'bonjour'
+    role: 'ROLE_USER'
+    active: 1
+    created: <dateTime()>

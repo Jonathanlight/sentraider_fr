@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -10,40 +12,16 @@ use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-
 /**
  * @ApiResource(
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
  *     collectionOperations={
  *      "get"={},
- *      "post"={
- *          "swagger_context"={
- *              "summary": "Creates an user account"
- *          },
- *       },
- *      "check_gmail_user"={
- *          "method"="GET",
- *          "path"="/users/emails",
- *          "controller"=App\Controller\Api\CheckGmailUser::class,
- *       },
- *      "create_new_user"={
- *          "method"="POST",
- *          "path"="/users/create",
- *          "controller"=App\Controller\Api\CreateUser::class,
- *          "swagger_context"= {
- *              "summary"= "Create new user - ",
- *              "description"= "Create new user",
- *          }
- *       },
+ *      "post"={}
  *     },
  *     itemOperations={
  *       "get"={},
- *       "enabled_user"={
- *          "method"="GET",
- *          "path"="/users/{id}/enabled",
- *          "controller"=App\Controller\Api\EnabledUser::class
- *       },
  *       "put"={},
  *       "delete"={},
  *     }
@@ -143,22 +121,55 @@ class User  implements UserInterface
     private $deleted;
 
     /**
+     * @var ArrayCollection|Collection
+     *
+     * @ORM\OneToMany(targetEntity=Help::class, mappedBy="user")
+     */
+    private $helps;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean", options={"default":0})
      * @Groups({"user:read","user:write"})
      */
     protected $enabled = 0;
 
+    /**
+     * User constructor.
+     */
+    public function __construct()
+    {
+        $this->helps = new ArrayCollection();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getId().' - '.$this->getUsername();
+    }
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getUsername(): ?string
     {
         return $this->username;
     }
 
+    /**
+     * @param string|null $username
+     * @return $this
+     */
     public function setUsername(?string $username): self
     {
         $this->username = $username;
@@ -166,11 +177,18 @@ class User  implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string|null $email
+     * @return $this
+     */
     public function setEmail(?string $email): self
     {
         $this->email = $email;
@@ -178,11 +196,18 @@ class User  implements UserInterface
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * @param string|null $password
+     * @return $this
+     */
     public function setPassword(?string $password): self
     {
         $this->password = $password;
@@ -393,5 +418,29 @@ class User  implements UserInterface
     public function eraseCredentials()
     {
 
+    }
+
+    /**
+     * @param Help $help
+     */
+    public function addHelp(Help $help): void
+    {
+        $this->helps[] = $help;
+    }
+
+    /**
+     * @param Help $help
+     */
+    public function removeHelp(Help $help)
+    {
+        $this->helps->removeElement($help);
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getHelps()
+    {
+        return $this->helps;
     }
 }

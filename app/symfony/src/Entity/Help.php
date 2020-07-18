@@ -45,16 +45,34 @@ class Help
      */
     private $created;
 
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"}, inversedBy="helps")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    private $user;
+
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string|null $name
+     * @return $this
+     */
     public function setName(?string $name): self
     {
         $this->name = $name;
@@ -62,11 +80,18 @@ class Help
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
+    /**
+     * @param string|null $description
+     * @return $this
+     */
     public function setDescription(?string $description): self
     {
         $this->description = $description;
@@ -74,6 +99,9 @@ class Help
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getCreated(): ?\DateTimeInterface
     {
         return $this->created;
@@ -84,5 +112,24 @@ class Help
         $this->created = $created;
 
         return $this;
+    }
+
+    /**
+     * @param User|null $user
+     * @return $this
+     */
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return User|null
+     */
+    public function getUser(): ?User
+    {
+        return $this->user;
     }
 }

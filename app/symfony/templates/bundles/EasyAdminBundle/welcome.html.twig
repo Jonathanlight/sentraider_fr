@@ -1,0 +1,19 @@
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block page_title %} Dashboad {% endblock %}
+
+{% block content %}
+    <div class="content">
+
+        <div class="container">
+            <!-- Breadcrumbs-->
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="#">{{ 'page.dashboard.title'|trans }}</a>
+                </li>
+                <li class="breadcrumb-item active">{{ user.username }} </li>
+            </ol>
+            <!-- Icon Cards-->
+        </div>
+    </div>
+{% endblock content %}
