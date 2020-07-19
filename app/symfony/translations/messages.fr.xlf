@@ -67,5 +67,35 @@
         <target>Tableau de bord</target>
       </segment>
     </unit>
+    <unit id=".DP3Mkb" name="City">
+      <segment>
+        <source>City</source>
+        <target>Ville</target>
+      </segment>
+    </unit>
+    <unit id="0VOH7Mb" name="Slug">
+      <segment>
+        <source>Slug</source>
+        <target>Slug</target>
+      </segment>
+    </unit>
+    <unit id="GqTLC8y" name="Image">
+      <segment>
+        <source>Image</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="XhS3Bkw" name="form.label.delete">
+      <segment>
+        <source>form.label.delete</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="Xl0CFs4" name="Supprimer">
+      <segment>
+        <source>Supprimer</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

@@ -15,5 +15,38 @@
             </ol>
             <!-- Icon Cards-->
         </div>
+
+        <div class="container">
+            <div class="row">
+                <h1> Tableau de bord </h1>
+            </div>
+            <div class="row mt-3">
+                <div class="col-6 alert-success">
+                    <span class="display-3"> {{ countUser['value'] }} </span> Utilisateurs
+                </div>
+                <div class="col-6 alert-dark">
+                    <span class="display-3"> {{ countHelp['value'] }} </span> Aides
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-12">
+                    <h3> Liste des villes </h3>
+
+                    <ul class="list-group">
+                        {% for city in cities %}
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="display-4">
+                                <i class="fa fa-map"></i>
+                                {{ city.name }}
+                            </span>
+                            <span class="badge badge-pill">
+                                <img class="img-thumbnail" src="{{ vich_uploader_asset(city, 'imageFile') }}" style="width: 150px;">
+                            </span>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}
