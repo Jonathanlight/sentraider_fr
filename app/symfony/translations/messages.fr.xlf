@@ -97,5 +97,11 @@
         <target>Supprimer</target>
       </segment>
     </unit>
+    <unit id="CW5Rulg" name="page.home.header.connexion">
+      <segment>
+        <source>page.home.header.connexion</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
   </file>
 </xliff>
