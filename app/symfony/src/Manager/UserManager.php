@@ -57,6 +57,21 @@ class UserManager
     }
 
     /**
+     * @param int $id
+     */
+    public function remove(int $id)
+    {
+        $user = $this->userRepository->find($id);
+
+        if ($user instanceof User) {
+            $user->setEmail('***********************');
+            $user->setUsername('***********************');
+            $this->em->persist($user);
+            $this->em->flush();
+        }
+    }
+
+    /**
      * @param User $user
      * @return array|string
      * @throws \Exception

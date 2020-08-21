@@ -103,5 +103,17 @@
         <target>Connexion</target>
       </segment>
     </unit>
+    <unit id="47ienTP" name="Username">
+      <segment>
+        <source>Username</source>
+        <target>Username</target>
+      </segment>
+    </unit>
+    <unit id="lpzL089" name="Email">
+      <segment>
+        <source>Email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

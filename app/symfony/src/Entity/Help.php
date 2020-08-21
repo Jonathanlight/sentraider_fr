@@ -53,6 +53,11 @@ class Help
      */
     private $user;
 
+    public function __toString()
+    {
+        return ''.$this->getName();
+    }
+
     /**
      * @return int|null
      */
