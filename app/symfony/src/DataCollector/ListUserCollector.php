@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
-class AppBarFatboarCollector extends DataCollector
+class ListUserCollector extends DataCollector
 {
     /**
      * @var UserRepository

@@ -20,7 +20,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|img|js)/
             security: false
         admin:
-            pattern: ^/admin_74ze5f
+            pattern: ^(/$|/user|/admin_74ze5f|/home/|/home$)
             provider: admin
             anonymous: ~
             logout:

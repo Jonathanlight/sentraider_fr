@@ -18,7 +18,7 @@ services:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
 
-    App\DataCollector\AppBarFatboarCollector:
+    App\DataCollector\ListUserCollector:
         arguments: [ '@App\Repository\UserRepository', '@App\Repository\CityRepository' ]
         tags:
               -
