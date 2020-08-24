@@ -1,0 +1,77 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        {# this is the content displayed as a panel in the toolbar #}
+        {% set status_color = collector.countUsers ? '#0b2e13' : collector.countUsers ? 'white' %}
+        {% set icon_fill_color = profiler_markup_version == 1 ? '#222' : '#AAA' %}
+        {% set icon_height = profiler_markup_version == 1 ? '28' : '24' %}
+        <span class="label" style="background: #0b2e13">
+            <span class="icon">
+                <img src="{{ asset('data_collector/logo.png') }}" alt=""/>
+            </span>
+            <span class="sf-toolbar-value">AppBar Fatboar</span>
+        </span>
+    {% endset %}
+
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Users : </b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.countUsers ? '#0b2e13' : 'red' }}">
+                {{ collector.countUsers }}
+            </span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Users : </b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.countUsers ? '#0b2e13' : 'red' }}">
+                {{ collector.countUsers }}
+            </span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Users : </b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.countUsers ? '#0b2e13' : 'red' }}">
+                {{ collector.countUsers }}
+            </span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Users : </b>
+            <span class="sf-toolbar-status sf-toolbar-status-{{ collector.countUsers ? '#0b2e13' : 'red' }}">
+                {{ collector.countUsers }}
+            </span>
+        </div>
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: true, status: status_color }) }}
+{% endblock %}
+
+{% block head %}
+     {{ parent() }}
+{% endblock %}
+
+{% block menu %}
+    <span class="label">
+        <span class="icon"> <img src="{{ asset('data_collector/logo.png') }}" alt=""/> </span>
+        <strong>AppBar</strong>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>User</h2>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>Email</th>
+                </tr>
+
+                {% for user in collector.users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -17,3 +17,12 @@ services:
         class: App\EventListener\JWTCreatedListener
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccessResponse }
+
+    App\DataCollector\AppBarFatboarCollector:
+        arguments: [ '@App\Repository\UserRepository', '@App\Repository\CityRepository' ]
+        tags:
+              -
+                  name:     data_collector
+                  template: 'data_collector/layout.html.twig'
+                  id:       'app.sentraider_fr'
+                  #priority: 300
