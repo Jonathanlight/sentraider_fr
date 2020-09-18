@@ -4,7 +4,11 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Manager\UserManager;
+use App\Repository\CityRepository;
+use App\Repository\HelpRepository;
 use App\Repository\UserRepository;
+use App\Services\MessageService;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -23,6 +27,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserCrudController extends AbstractCrudController
 {
+    protected $messageService;
+
+    public function __construct(MessageService $messageService){
+        $this->messageService = $messageService;
+    }
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -110,6 +120,13 @@ class UserCrudController extends AbstractCrudController
             ->add(Crud::PAGE_INDEX, $removeUser)
             ->add(Crud::PAGE_INDEX, $statistic)
         ;
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        parent::updateEntity($entityManager, $entityInstance);
+
+        $this->messageService->addSuccess('Votre User à bien été modifier .');
     }
 
     public function configureFields(string $pageName): iterable

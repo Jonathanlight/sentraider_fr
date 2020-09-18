@@ -115,5 +115,23 @@
         <target>Email</target>
       </segment>
     </unit>
+    <unit id="1Z0w8Ek" name="entity.update">
+      <segment>
+        <source>entity.update</source>
+        <target>Votre Entity à bien été modifier avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="talLt25" name="form.user.name">
+      <segment>
+        <source>form.user.name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="QC1dAHK" name="form.user.description">
+      <segment>
+        <source>form.user.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

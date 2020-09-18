@@ -30,7 +30,7 @@
 <nav class="navbar navbar-light bg-light static-top">
     <div class="container">
         <a class="navbar-brand" href="#">Start Bootstrap</a>
-        <a class="btn btn-primary" href="#">Sign In</a>
+        <a href="{{ path('contact') }}" class="btn btn-primary btn-sm mt-3" href="#">Contact</a>
         <a href="{{ path('admin_login') }}" class="btn btn-success btn-sm mt-3 white">
             EasyAdmin 3 Connexion
         </a>
@@ -43,7 +43,7 @@
     <div class="container">
         <div class="row">
             <div class="col-xl-9 mx-auto">
-                <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+                <h1 class="mb-5">  {{ cutString('Build a landing page for your business or project and generate more leads!') }} </h1>
             </div>
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
                 <form>
