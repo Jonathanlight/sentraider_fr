@@ -10,11 +10,6 @@ class ContactEvent extends Event
     const TEMPLATE_CONTACT = "email/contact.html.twig";
 
     /**
-     * @var Contact
-     */
-    protected $contact;
-
-    /**
      * @param Contact $contact
      */
     public function __construct(Contact $contact)
@@ -25,7 +20,8 @@ class ContactEvent extends Event
     /**
      * @return Contact
      */
-    public function getContact(): Contact{
+    public function getContact(): Contact
+    {
         return $this->contact;
     }
 }

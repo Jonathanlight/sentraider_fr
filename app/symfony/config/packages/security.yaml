@@ -36,3 +36,4 @@ security:
         - { path: ^/admin_74ze5f/, role: ROLE_SUPER_ADMIN }
         - { path: ^/user/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/, roles: [ROLE_USER, ROLE_SUPER_ADMIN] }
+        - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }

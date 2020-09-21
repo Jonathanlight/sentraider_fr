@@ -11,14 +11,14 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 class ContactManager
 {
     /**
-     * @var EventDispatcherInterface
-     */
-    protected $eventDispatcher;
-
-    /**
      * @var EntityManagerInterface
      */
     protected $em;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    protected $eventDisptacher;
 
     /**
      * @var MessageService
@@ -26,14 +26,14 @@ class ContactManager
     protected $messageService;
 
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
         EntityManagerInterface $em,
-        MessageService $messageService
+        MessageService $messageService,
+        EventDispatcherInterface $eventDisptacher
     )
     {
-        $this->eventDispatcher = $eventDispatcher;
         $this->em = $em;
         $this->messageService = $messageService;
+        $this->eventDisptacher = $eventDisptacher;
     }
 
     /**
@@ -46,7 +46,7 @@ class ContactManager
             $this->em->flush();
 
             $event = new ContactEvent($contact);
-            $this->eventDispatcher->dispatch($event);
+            $this->eventDisptacher->dispatch($event);
 
             $this->messageService->addSuccess('Votre message à bien été  valider .');
         }
