@@ -26,3 +26,8 @@ services:
                   template: 'data_collector/layout.html.twig'
                   id:       'app.sentraider_fr'
                   #priority: 300
+
+    App\EventListener\ContactListener:
+        tags:
+            - { name: doctrine.event_listener, event: prePersist, lazy: true }
+            - { name: doctrine.event_listener, event: preUpdate, lazy: true }

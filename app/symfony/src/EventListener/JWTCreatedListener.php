@@ -45,6 +45,7 @@ class JWTCreatedListener
         if (!$user instanceof UserInterface) {
             return;
         }
+
         if ($user instanceof User)
 
             $data['data'] = array(
