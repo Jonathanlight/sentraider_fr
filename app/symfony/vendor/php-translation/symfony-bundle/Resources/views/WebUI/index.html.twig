@@ -1,0 +1,73 @@
+{% extends "@Translation/WebUI/base.html.twig" %}
+{% import _self as macro %}
+
+{% block _translation_bundle_body %}
+    <div class="container">
+        {% for cataloge in catalogues %}
+            <h3 class="mt-3">{{ localeMap[cataloge.locale] }}</h3>
+            <table class="table domain-table">
+                {% set totalMessages = 0 %}
+                {% set translatedMessages = 0 %}
+                {% for domain,messages in cataloge.all|sort %}
+                    {% set pg = 0 %}
+                    {% set translated = 0 %}
+                    {% for message in messages %}
+                        {% if message != '' %}
+                            {% set translated = translated + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {% if translated > 0 %}
+                        {% set pg = (translated/messages|length*100)|round(2) %}
+                    {% endif %}
+                    <tr>
+                        <td>
+                            <a href="{{ path("translation_show", {configName: configName, domain:domain, locale:cataloge.locale}) }}">
+                                {{ domain }}
+                            </a>
+                        </td>
+                        <td class="progressbar-cell">
+                            {{ macro.progress(pg, "") }}
+                        </td>
+                        <td>
+                            <div class="text-nowrap">
+                                <small>({{ translated }} / {{ messages|length }})</small>
+                                <b>{{ pg }} %</b>
+                            </div>
+                        </td>
+                    </tr>
+                    {% set totalMessages = totalMessages + messages|length %}
+                    {% set translatedMessages = translatedMessages + translated %}
+                {% endfor %}
+            </table>
+            {% if totalMessages == 0 %}
+                {% set pg = 100 %}
+            {% elseif translatedMessages > 0 and totalMessages > 0 %}
+                {% set pg = (translatedMessages/totalMessages*100)|round(2) %}
+            {% else %}
+                {% set pg = 0 %}
+            {% endif %}
+
+            <div class="text-xs-center">
+                Total progress for this language:
+                <small>({{ translatedMessages }} / {{ totalMessages }})</small>
+                <b>{{ pg }}%</b>
+            </div>
+            {{ macro.progress(pg, "total-progressbar") }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% macro progress(pg, class) %}
+    {% if pg < 60 %}
+        {% set type="danger" %}
+    {% elseif pg < 80 %}
+        {% set type="warning" %}
+    {% else %}
+        {% set type="success" %}
+    {% endif %}
+    <div class="py-1">
+        <div class="progress">
+            <div class="progress-bar bg-{{ type }}" role="progressbar" style="width: {{ pg }}%" aria-valuenow="{{ pg }}" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+    </div>
+{% endmacro %}

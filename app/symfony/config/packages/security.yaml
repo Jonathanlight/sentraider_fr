@@ -31,9 +31,31 @@ security:
             guard:
                 authenticators:
                     - App\Security\Guard\AdminLoginAuthenticator
+        api:
+            pattern: ^/api/v1/
+            stateless: true
+            anonymous: true
+            provider: user
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+        main:
+            anonymous: true
+            json_login:
+                check_path: /login
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
     access_control:
         - { path: ^/admin_74ze5f/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin_74ze5f/, role: ROLE_SUPER_ADMIN }
         - { path: ^/user/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/user/, roles: [ROLE_USER, ROLE_SUPER_ADMIN] }
         - { path: ^/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/fb9870/documentation, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/users/create, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/users/[0-9]+/enabled, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/v1/, roles: IS_AUTHENTICATED_FULLY }

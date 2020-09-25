@@ -1,0 +1,36 @@
+parameters:
+    test_app.random: 'Random parameter'
+
+framework:
+    secret: test
+    test: ~
+
+services:
+    data_fixtures.faker.provider.foo:
+        class: Hautelook\AliceBundle\Functional\TestBundle\DataFixtures\Faker\Provider\FooProvider
+        tags: [ { name: nelmio_alice.faker.provider } ]
+        public: true
+
+    app.city_factory:
+        class: Hautelook\AliceBundle\Functional\TestBundle\Entity\CityFactory
+        public: true
+
+    logger:
+        class: Psr\Log\NullLogger
+        public: true
+
+    hautelook_alice.data_fixtures.loader.file_resolver_loader:
+        class: Fidry\AliceDataFixtures\Loader\FileResolverLoader
+        arguments:
+            $decoratedLoader: '@fidry_alice_data_fixtures.doctrine.purger_loader'
+            $fileResolver: '@hautelook_alice.resolver.file'
+        public: true
+
+    hautelook_alice.loader.doctrine_orm_loader:
+        class: Hautelook\AliceBundle\Loader\DoctrineOrmLoader
+        arguments:
+            $bundleResolver: '@hautelook_alice.resolver.bundle'
+            $fixtureLocator: '@hautelook_alice.locator'
+            $purgeLoader: '@hautelook_alice.data_fixtures.purge_loader'
+            $appendLoader: '@hautelook_alice.data_fixtures.append_loader'
+        public: true

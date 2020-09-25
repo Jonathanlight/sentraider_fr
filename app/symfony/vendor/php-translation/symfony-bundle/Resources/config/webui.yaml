@@ -1,0 +1,16 @@
+services:
+    Translation\Bundle\Controller\WebUIController:
+        autowire: true
+        public: true
+        tags: ['controller.service_arguments']
+        arguments:
+            - '@Translation\Bundle\Service\ConfigurationManager'
+            - '@Translation\Bundle\Catalogue\CatalogueFetcher'
+            - '@Translation\Bundle\Catalogue\CatalogueManager'
+            - '@Translation\Bundle\Service\StorageManager'
+            - '@Symfony\Component\Validator\Validator\ValidatorInterface'
+            - '%php_translation.locales%'
+            - '%php_translation.webui.enabled%'
+            - '%php_translation.webui.allow_create%'
+            - '%php_translation.webui.allow_delete%'
+            - '%php_translation.webui.file_base_path%'

@@ -1,0 +1,119 @@
+{% extends "@Translation/WebUI/base.html.twig" %}
+{% import _self as macro %}
+
+{% block _translation_bundle_body %}
+    <div class="container locales">
+        <h5 class="mt-2">Locales:</h5>
+        {% for locale in locales %}
+            <a class="locales-item{% if currentLocale == locale %} active{% endif %}" href="{{ path('translation_show', {configName: configName, domain:currentDomain, locale:locale}) }}">
+                {{ locale }}
+            </a>
+        {% endfor %}
+        <h5 class="mt-2">Domains:</h5>
+        {% for domain in domains %}
+            <a class="locales-item{% if currentDomain == domain %} active{% endif %}" href="{{ path('translation_show', {configName: configName, domain:domain, locale:currentLocale}) }}">
+                {{ domain }}
+            </a>
+        {% endfor %}
+        <h5 class="mt-2">Filter: <a class="show-only-empty" href="javascript:void(0);" onclick="showOnlyEmptyMessages(this)">
+                Only empty
+            </a> |
+            <a class="show-all" href="javascript:void(0);" onclick="showAllMessages(this)">
+                All
+            </a>
+        </h5>
+    </div>
+    <hr>
+    <div class="container message-list">
+        <h1>Translations
+            {% if allow_create %}
+                <a href="javascript:void(0);"
+                   class="btn btn-secondary"
+                   onclick='toggleElement("create-translation")'
+                   aria-controls="create-translation">Add new</a>
+            {% endif %}
+        </h1>
+
+        {% if allow_create %}
+            <div class="collapse" id="create-translation">
+                <form class="form" onsubmit="return createTranslation(this, '{{ path('translation_create', {configName: configName, locale:currentLocale,domain:currentDomain}) }}')">
+                    <div class="form-group">
+                        <label for="create-key">Key</label>
+                        <input type="text" class="form-control" id="create-key" placeholder="foo.label">
+                    </div>
+                    <div class="form-group">
+                        <label for="create-message">Translation</label>
+                        <input type="text" class="form-control" id="create-message" placeholder="Lorem Ipsum">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <div class="ajax-result"></div>
+                </form>
+            </div>
+        {% endif %}
+
+        <div id="new-translations"></div>
+        {% for idx, message in messages|filter(message => message.new) %}
+            {{ macro.printMessage(idx + 1, message, allow_delete, file_base_path) }}
+        {% endfor %}
+
+        {% set idxStart = messages|length %}
+        {% for idx, message in messages|filter(message => not message.new) %}
+            {{ macro.printMessage(idx + idxStart, message, allow_delete, file_base_path) }}
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block _translation_bundle_js %}
+    <script type="text/javascript">
+      var editUrl = "{{ path('translation_edit', {configName: configName, locale:currentLocale,domain:currentDomain}) }}";
+    </script>
+    {{ parent() }}
+{% endblock %}
+
+{% macro printMessage(idx, message, allow_delete, base_path) %}
+    <div class="row message {{ message.message ? '' : 'empty' }}" id="{{ message.key }}">
+        <div class="col-12">
+            <hr>
+        </div>
+        <div class="col-md-6 col-12">
+            <div class="form-group">
+                {% if message.new %}
+                    <span class="text-primary" title="New">&#x25CF;</span>
+                {% endif %}
+                {% if message.obsolete %}
+                    <span class="text-warning" title="Obsolete">&#x26A0;</span>
+                {% endif %}
+                <a class="message-key" href="#{{ message.key }}">{{ message.key }}</a>
+                {% if allow_delete %}
+                    <a class="message-delete close" href="javascript:void(0)" data-key="{{ message.key }}" title="Delete translation" onclick='confirm("Are you sure?")?deleteTranslation(this):false;'><span>&times;</span></a>
+                {% endif %}
+                <textarea
+                        class="form-control"
+                        data-key="{{ message.key }}"
+                        onchange="editTranslation(this)"
+                        tabindex="{{ idx }}"
+                >{{ message.message }}</textarea>
+                <div class="ajax-result"></div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+            {% for locale, trans in message.otherTranslations|filter(trans => not trans is empty) %}
+                <b>{{ locale }}</b>: {{ trans }}<br>
+            {% endfor %}
+        </div>
+
+        <div class="col-12">
+            {% if message.sourceLocations|length > 0 %}
+                <ul class="location-list">
+                    {% for location in message.sourceLocations %}
+                        <li>
+                            <a href="{{ (base_path ~ location['path'])|file_link(location['line']) }}">{{ location['path'] }}
+                                at line {{ location['line'] }} </a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+{% endmacro %}

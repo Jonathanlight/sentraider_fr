@@ -1,0 +1,52 @@
+services:
+  Translation\Bundle\Controller\EditInPlaceController:
+    autowire: true
+    public: true
+    tags: ['controller.service_arguments']
+    arguments:
+      - '@Translation\Bundle\Service\StorageManager'
+      - '@Translation\Bundle\Service\CacheClearer'
+      - '@Symfony\Component\Validator\Validator\ValidatorInterface'
+
+  Translation\Bundle\EventListener\EditInPlaceResponseListener:
+    tags:
+      - { name: 'kernel.event_listener', event: 'kernel.response', method: 'onKernelResponse' }
+    arguments:
+      - ~
+      - '@router'
+      - '@assets.packages'
+      - ~
+      - ~
+
+  Translation\Bundle\EditInPlace\Activator:
+    arguments: ['@session']
+    public: true
+
+  Translation\Bundle\Translator\EditInPlaceTranslator:
+    arguments:
+      - '@translator'
+      - ~
+      - '@request_stack'
+
+  Translation\Bundle\Twig\EditInPlaceExtension:
+    public: false
+    arguments:
+      - '@twig.extension.trans'
+      - '@request_stack'
+      - ~
+    tags:
+      - { name: 'twig.extension' }
+
+  # To remove in next major release
+  php_translation.edit_in_place.response_listener:
+    parent: Translation\Bundle\EventListener\EditInPlaceResponseListener
+    deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+  php_translation.edit_in_place.activator:
+    parent: Translation\Bundle\EditInPlace\Activator
+    deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+  php_translator.edit_in_place.xtrans_html_translator:
+    parent: Translation\Bundle\Translator\EditInPlaceTranslator
+    deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+  php_translation.edit_in_place.extension.trans:
+    parent: Translation\Bundle\Twig\EditInPlaceExtension
+    deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'

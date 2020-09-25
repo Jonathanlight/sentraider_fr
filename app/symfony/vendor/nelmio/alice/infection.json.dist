@@ -1,0 +1,25 @@
+{
+    "$schema": "./vendor-bin/infection/vendor/infection/infection/resources/schema.json",
+    "source": {
+        "directories": [
+            "src"
+        ],
+        "excludes": [
+            "fixtures",
+            "src/deep_clone.php",
+            "src/Bridge",
+            "src/FileLocator/DefaultFileLocator.php",
+            "src/FixtureBuilder/Denormalizer/Fixture/Chainable/RangeNameDenormalizer.php",
+            "src/Generator/Resolver/Parameter/Chainable/RecursiveParameterResolver.php",
+            "tests",
+            "vendor"
+        ]
+    },
+    "phpUnit": {
+        "customPath": "./bin/phpunit"
+    },
+    "timeout": 10,
+    "logs": {
+        "text": "dist/infection.txt"
+    }
+}

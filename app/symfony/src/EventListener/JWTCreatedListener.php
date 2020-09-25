@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\EventListener;
 
 use App\Entity\User;
@@ -45,7 +46,6 @@ class JWTCreatedListener
         if (!$user instanceof UserInterface) {
             return;
         }
-
         if ($user instanceof User)
 
             $data['data'] = array(

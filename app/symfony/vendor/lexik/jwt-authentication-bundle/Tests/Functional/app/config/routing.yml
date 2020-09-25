@@ -1,0 +1,8 @@
+login_check:
+    path:     /login_check
+    methods:  [POST]
+
+secured:
+    path:     /api/secured
+    defaults:  { _controller: Lexik\Bundle\JWTAuthenticationBundle\Tests\Functional\Bundle\Controller\TestController::securedAction }
+    methods:  [GET]

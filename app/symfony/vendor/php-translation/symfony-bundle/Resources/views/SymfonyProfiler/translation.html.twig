@@ -1,0 +1,124 @@
+{% extends '@WebProfiler/Collector/translation.html.twig' %}
+
+{#
+ # Authors Tobias Nyholm, Damien Alexandre (damienalexandre), Damien Harper
+ #}
+
+{% import _self as helper %}
+
+{% block panel %}
+    <h2>PHP Translation</h2>
+
+    <div>
+        <a class="btn" href="javascript:void(0);" onclick='syncAll()'>Synchronize all translations</a><br />
+        <div id="top-result-area"></div>
+    </div>
+
+    {{ parent() }}
+
+    <span class="hidden">
+        <img src="{{ asset("bundles/translation/css/images/loader.svg") }}" width="60" id="svg-loader">
+    </span>
+
+    {% include "@Translation/SymfonyProfiler/javascripts.html.twig" %}
+{% endblock %}
+
+{% block defined_messages %}
+    {% set messages = [] %}
+    {% for key, message in collector.messages|filter(message => message.state == constant('Symfony\\Component\\Translation\\DataCollectorTranslator::MESSAGE_DEFINED')) %}
+        {% set messages = messages|merge({(key): message}) %}
+    {% endfor %}
+
+    {{ helper.render_table(messages) }}
+{% endblock %}
+
+{% block fallback_messages %}
+    {% set messages = [] %}
+    {% for key, message in collector.messages|filter(message => message.state == constant('Symfony\\Component\\Translation\\DataCollectorTranslator::MESSAGE_EQUALS_FALLBACK')) %}
+        {% set messages = messages|merge({(key): message}) %}
+    {% endfor %}
+
+    {{ helper.render_table(messages) }}
+{% endblock %}
+
+{% block missing_messages %}
+    {% set messages = [] %}
+    {% for key, message in collector.messages|filter(message => message.state == constant('Symfony\\Component\\Translation\\DataCollectorTranslator::MESSAGE_MISSING')) %}
+        {% set messages = messages|merge({(key): message}) %}
+    {% endfor %}
+
+    <form action="{{ path('php_translation_profiler_translation_create_assets', {'token': token}) }}" method="post"
+        id="translations-list" onSubmit="return saveTranslations(this);" >
+
+            {{ helper.render_table(messages, true) }}
+
+        <p class="full-width" id="translationResult"></p>
+
+        <button type="submit" class="btn">
+            Add selected messages
+        </button>
+
+    </form>
+{% endblock %}
+
+{% macro render_table(messages, withCheckbox = false) %}
+    <table>
+        <thead>
+        <tr>
+            {% if withCheckbox %}
+                <th>
+                    <input type="checkbox" id="check-all-control" onchange="toggleCheckAll(this)" checked="checked">
+                </th>
+            {% endif %}
+            <th>Locale</th>
+            <th>Domain</th>
+            <th>Times used</th>
+            <th>Message ID</th>
+            <th>Message Preview</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key, message in messages %}
+            <tr id="{{ key }}">
+                <td>
+                    {% if withCheckbox %}
+                        <input type="checkbox" name="translationKey" value="{{ key }}" checked="checked" class="translation-key-checkbox">
+                    {% endif %}
+                </td>
+                <td class="font-normal text-small">{{ message.locale }}</td>
+                <td class="font-normal text-small text-bold nowrap">{{ message.domain }}</td>
+                <td class="font-normal text-small">{{ message.count }}</td>
+                <td>
+                    {{ message.id }}
+
+                    {% if message.transChoiceNumber is not null %}
+                        <small class="newline">(pluralization is used)</small>
+                    {% endif %}
+
+                    {% if message.parameters|length > 0 %}
+                        <button class="btn-link newline text-small sf-toggle" data-toggle-selector="#parameters-{{ loop.index }}" data-toggle-alt-content="Hide parameters">Show parameters</button>
+
+                        <div id="parameters-{{ loop.index }}" class="hidden">
+                            {% for parameters in message.parameters %}
+                                {{ profiler_dump(parameters) }}
+                                {% if not loop.last %}<br />{% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </td>
+                <td class="translation">
+                    {{ message.translation }}
+                </td>
+                <td width="155px">
+                    {% apply spaceless %}
+                    <a class="edit btn btn-sm" href="javascript:void(0);" onclick='getEditForm("{{ key }}")'>Edit</a>
+                        |
+                    <a class="sync btn btn-sm" href="javascript:void(0);" onclick='syncMessage("{{ key }}")'>Sync</a>
+                    {% endapply %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}

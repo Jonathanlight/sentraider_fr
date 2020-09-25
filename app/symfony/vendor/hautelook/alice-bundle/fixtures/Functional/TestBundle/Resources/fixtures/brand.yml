@@ -1,0 +1,13 @@
+parameters:
+    custom: 2
+
+Hautelook\AliceBundle\Functional\TestBundle\Entity\Product:
+    product{1..10}:
+        name: Product <current()>
+        price: 10.0
+        description: Awesome @self->name
+        brand: '@brand*'
+
+Hautelook\AliceBundle\Functional\TestBundle\Entity\Brand:
+    brand{1..10}:
+        name: Brand <{nelmio_alice.locale}> <foo(<{custom}>)> <name()> <{test_app.random}>

@@ -1,0 +1,74 @@
+services:
+    Translation\Bundle\Command\CheckMissingCommand:
+        public: true
+        arguments:
+            - '@Translation\Bundle\Service\ConfigurationManager'
+            - '@Translation\Bundle\Catalogue\CatalogueFetcher'
+            - '@Translation\Bundle\Service\Importer'
+            - '@Translation\Bundle\Catalogue\CatalogueCounter'
+        tags:
+            - { name: console.command, command: translation:check-missing }
+
+    Translation\Bundle\Command\DeleteObsoleteCommand:
+        public: true
+        arguments:
+          - '@Translation\Bundle\Service\StorageManager'
+          - '@Translation\Bundle\Service\ConfigurationManager'
+          - '@Translation\Bundle\Catalogue\CatalogueManager'
+          - '@Translation\Bundle\Catalogue\CatalogueFetcher'
+        tags:
+            - { name: console.command, command: translation:delete-obsolete}
+
+    Translation\Bundle\Command\DownloadCommand:
+        public: true
+        arguments:
+          - '@Translation\Bundle\Service\StorageManager'
+          - '@Translation\Bundle\Service\ConfigurationManager'
+          - '@Translation\Bundle\Service\CacheClearer'
+          - '@Translation\Bundle\Catalogue\CatalogueWriter'
+        tags:
+            - { name: console.command, command: translation:download }
+
+    Translation\Bundle\Command\ExtractCommand:
+        public: true
+        arguments:
+          - '@Translation\Bundle\Catalogue\CatalogueFetcher'
+          - '@Translation\Bundle\Catalogue\CatalogueWriter'
+          - '@Translation\Bundle\Catalogue\CatalogueCounter'
+          - '@Translation\Bundle\Service\Importer'
+          - '@Translation\Bundle\Service\ConfigurationManager'
+        tags:
+            - { name: console.command, command: translation:extract }
+
+    Translation\Bundle\Command\StatusCommand:
+        public: true
+        arguments:
+          - '@Translation\Bundle\Catalogue\CatalogueCounter'
+          - '@Translation\Bundle\Service\ConfigurationManager'
+          - '@Translation\Bundle\Catalogue\CatalogueFetcher'
+        tags:
+            - { name: console.command, command: translation:status }
+
+    Translation\Bundle\Command\SyncCommand:
+        public: true
+        arguments:
+          - '@Translation\Bundle\Service\StorageManager'
+        tags:
+            - { name: console.command, command: translation:sync }
+
+    # To remove in next major release
+    php_translator.console.delete_obsolete:
+        parent: Translation\Bundle\Command\DeleteObsoleteCommand
+        deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+    php_translator.console.download:
+        parent: Translation\Bundle\Command\DownloadCommand
+        deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+    php_translator.console.extract:
+        parent: Translation\Bundle\Command\ExtractCommand
+        deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+    php_translator.console.status:
+        parent: Translation\Bundle\Command\StatusCommand
+        deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'
+    php_translator.console.sync:
+        parent: Translation\Bundle\Command\SyncCommand
+        deprecated: 'The "%service_id%" service is deprecated. You should stop using it, as it will be removed in the future.'

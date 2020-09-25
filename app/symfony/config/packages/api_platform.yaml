@@ -15,6 +15,18 @@ api_platform:
     # Authorization bearer jwt
     swagger:
         versions: [3]
+
+    #Format
+    formats:
+        jsonld:  ['application/ld+json']
+        jsonhal: ['application/hal+json']
+        xml:     ['application/xml', 'text/xml']
+        json:    ['application/json']
+        yaml:    ['application/x-yaml']
+        csv:     ['text/csv']
+        html:    ['text/html']
+
+
         api_keys:
             apiKey:
                 name: Authorization

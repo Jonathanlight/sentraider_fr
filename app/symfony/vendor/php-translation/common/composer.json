@@ -1,0 +1,33 @@
+{
+    "name": "php-translation/common",
+    "description": "Common translation stuff",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tobias Nyholm",
+            "email": "tobias.nyholm@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/translation": " ^3.4 || ^4.3 || ^5.0"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "^4.3 || ^5.0",
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Translation\\Common\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Translation\\Common\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-ci": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml"
+    }
+}
