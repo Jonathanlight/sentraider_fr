@@ -10,55 +10,100 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class UserManager
 {
-    protected $passwordServices;
-    protected $entityManager;
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $em;
+
+    /**
+     * @var PasswordService
+     */
+    protected $passwordService;
+
+    /**
+     * @var UserRepository
+     */
     protected $userRepository;
 
+    /**
+     * UserManager constructor.
+     * @param EntityManagerInterface $entityManager
+     * @param PasswordService $passwordService
+     * @param UserRepository $userRepository
+     */
     public function __construct(
-        PasswordService $passwordServices,
         EntityManagerInterface $entityManager,
+        PasswordService $passwordService,
         UserRepository $userRepository
-    )
-    {
-        $this->passwordServices = $passwordServices;
-        $this->entityManager = $entityManager;
+    ) {
+        $this->em = $entityManager;
+        $this->passwordService = $passwordService;
         $this->userRepository = $userRepository;
     }
 
-    public function findEmail(string $email)
+    /**
+     * @param string $email
+     * @return mixed
+     */
+    public function findByEmail(string $email)
     {
         $user = $this->userRepository->findByEmail($email);
 
-        if ($user){
+        if ($user) {
             return $user[0];
         }
 
         return null;
     }
 
-    public function referenceFormat()
+    /**
+     * @param int $id
+     */
+    public function remove(int $id)
     {
-        return "REP".uniqid();
+        $user = $this->userRepository->find($id);
+
+        if ($user instanceof User) {
+            $user->setEmail('***********************');
+            $user->setUsername('***********************');
+            $this->em->persist($user);
+            $this->em->flush();
+        }
     }
 
+    /**
+     * @param User $user
+     * @return array|string
+     * @throws \Exception
+     */
     public function registerAccount(User $user)
     {
-        if ($this->findEmail($user->getEmail())){
-            throw new BadRequestHttpException('Cette adresse email existe déjà');
+        if ($this->findByEmail($user->getEmail())) {
+            throw new BadRequestHttpException('Cette adresse email a déjà été utilisé.');
         }
 
         $user->setUsername($user->getEmail());
-        $password = $this->passwordServices->encode($user, $user->getPassword());
-        $user->setPassword($password);
+        $pass = $this->passwordService->encode($user, $user->getPassword());
+        $user->setPassword($pass);
         $user->setReference($this->referenceFormat());
         $user->setCreated(new \DateTime());
         $user->setUpdated(new \DateTime());
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
+        $this->em->persist($user);
+        $this->em->flush();
 
         return [
-            "message" => "création d'un utilisateur a bien été effectue",
-            "user" => $user
+            'message' => 'Création de compte enregistrée.',
+            'user' => $user
         ];
+    }
+
+    /**
+     * REP + ANNEE + MOIS + JOUR + TOKEN GENERER.
+     *
+     * @return string
+     */
+    public function referenceFormat()
+    {
+        return 'REP'.substr(date('Y'), 2).date('md').uniqid();
     }
 }

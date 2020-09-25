@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:2.0" version="2.0" srcLang="fr" trgLang="fr">
+  <file id="messages.fr">
+    <unit id="yO2Rj4B" name="form.user.email">
+      <segment>
+        <source>form.user.email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="AZX21gt" name="form.user.password">
+      <segment>
+        <source>form.user.password</source>
+        <target>Password</target>
+      </segment>
+    </unit>
+    <unit id="PX8Ea35" name="form.action.login">
+      <segment>
+        <source>form.action.login</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="t5yskm4" name="Help">
+      <segment>
+        <source>Help</source>
+        <target>Aide</target>
+      </segment>
+    </unit>
+    <unit id="OEOXHc." name="ID">
+      <segment>
+        <source>ID</source>
+        <target>ID</target>
+      </segment>
+    </unit>
+    <unit id="3NHVIj9" name="Name">
+      <segment>
+        <source>Name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="Um4Ah8w" name="Description">
+      <segment>
+        <source>Description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+    <unit id="tRLZfny" name="User">
+      <segment>
+        <source>User</source>
+        <target>User</target>
+      </segment>
+    </unit>
+    <unit id="Z7aWRoY" name="Dashboard">
+      <segment>
+        <source>Dashboard</source>
+        <target>Tableau de bord</target>
+      </segment>
+    </unit>
+    <unit id="Dr0lo0H" name="Ville">
+      <segment>
+        <source>Ville</source>
+        <target>Ville</target>
+      </segment>
+    </unit>
+    <unit id="fgr8cU7" name="page.dashboard.title">
+      <segment>
+        <source>page.dashboard.title</source>
+        <target>Tableau de bord</target>
+      </segment>
+    </unit>
+    <unit id=".DP3Mkb" name="City">
+      <segment>
+        <source>City</source>
+        <target>Ville</target>
+      </segment>
+    </unit>
+    <unit id="0VOH7Mb" name="Slug">
+      <segment>
+        <source>Slug</source>
+        <target>Slug</target>
+      </segment>
+    </unit>
+    <unit id="GqTLC8y" name="Image">
+      <segment>
+        <source>Image</source>
+        <target>Image</target>
+      </segment>
+    </unit>
+    <unit id="XhS3Bkw" name="form.label.delete">
+      <segment>
+        <source>form.label.delete</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="Xl0CFs4" name="Supprimer">
+      <segment>
+        <source>Supprimer</source>
+        <target>Supprimer</target>
+      </segment>
+    </unit>
+    <unit id="CW5Rulg" name="page.home.header.connexion">
+      <segment>
+        <source>page.home.header.connexion</source>
+        <target>Connexion</target>
+      </segment>
+    </unit>
+    <unit id="47ienTP" name="Username">
+      <segment>
+        <source>Username</source>
+        <target>Username</target>
+      </segment>
+    </unit>
+    <unit id="lpzL089" name="Email">
+      <segment>
+        <source>Email</source>
+        <target>Email</target>
+      </segment>
+    </unit>
+    <unit id="1Z0w8Ek" name="entity.update">
+      <segment>
+        <source>entity.update</source>
+        <target>Votre Entity à bien été modifier avec succès.</target>
+      </segment>
+    </unit>
+    <unit id="talLt25" name="form.user.name">
+      <segment>
+        <source>form.user.name</source>
+        <target>Name</target>
+      </segment>
+    </unit>
+    <unit id="QC1dAHK" name="form.user.description">
+      <segment>
+        <source>form.user.description</source>
+        <target>Description</target>
+      </segment>
+    </unit>
+  </file>
+</xliff>

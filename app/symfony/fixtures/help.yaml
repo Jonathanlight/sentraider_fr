@@ -1,0 +1,54 @@
+App\Entity\Help:
+  help001:
+    name: "Jardinier"
+    description: |
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+      sed do eiusmod tempor incididunt ut labore et dolore magna
+      aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+      ullamco laboris
+    created: <dateTime()>
+    user: '@user1'
+  help002:
+    name: "Terrassier"
+    description: |
+      Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+      accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+      quae ab illo inventore veritatis et quasi architecto beatae
+      vitae dicta sunt explicabo.
+    created: <dateTime()>
+    user: '@user2'
+  help003:
+    name: "Chocolatier"
+    description: |
+      Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit
+      aut fugit, sed quia consequuntur magni dolores eos qui ratione
+      voluptatem sequi nesciunt
+    created: <dateTime()>
+    user: '@user1'
+  help004:
+    name: "Plombier"
+    description: |
+      Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet,
+      consectetur, adipisci velit, sed quia non numquam eius modi tempora
+      incidunt ut labore et dolore magnam aliquam quaerat voluptatem
+    created: <dateTime()>
+    user: '@user3'
+  help005:
+    name: "Menuisier"
+    description: |
+      Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
+      suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+      Quis autem vel eum iure reprehenderit qui in ea voluptate velit
+      esse quam nihil molestiae consequatur, vel illum qui dolorem eum
+      fugiat quo voluptas nulla pariatur
+    created: <dateTime()>
+    user: '@user3'
+  help006:
+    name: "Serrurier"
+    description: |
+      But I must explain to you how all this mistaken idea of denouncing
+      pleasure and praising pain was born and I will give you a complete
+      account of the system, and expound the actual teachings of the
+      great explorer of the truth,
+    created: <dateTime()>
+    user: '@user1'

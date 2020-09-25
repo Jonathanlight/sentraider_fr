@@ -1,0 +1,10 @@
+App\Entity\User:
+  user{1..10}:
+    username: <freeEmail()>
+    email: <freeEmail()>
+    password: 'bonjour'
+    role: 'ROLE_USER'
+    enabled: 1
+    has_validated_cgu: true
+    updated: <dateTime()>
+    created: <dateTime()>

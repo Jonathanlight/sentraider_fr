@@ -1,0 +1,29 @@
+App\Entity\City:
+  city001:
+    slug: "paris"
+    name: "Paris"
+    created: <dateTime()>
+  city002:
+    slug: "lille"
+    name: "Lille"
+    created: <dateTime()>
+  city003:
+    slug: "marseille"
+    name: "Marseille"
+    created: <dateTime()>
+  city004:
+    slug: "toulouse"
+    name: "Toulouse"
+    created: <dateTime()>
+  city005:
+    slug: "nice"
+    name: "Nice"
+    created: <dateTime()>
+  city006:
+    slug: "angers"
+    name: "Angers"
+    created: <dateTime()>
+  city007:
+    slug: "lyon"
+    name: "Lyon"
+    created: <dateTime()>

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil !{% endblock %}
+
+{% block body %}
+    <!-- Icons Grid -->
+    <div class="m-5">
+        {{ include('composant/flash_messages.html.twig') }}
+    </div>
+
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <h1>Contact</h1>
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        {{ form_start(formContact) }}
+
+                            <div class="form-control m-5">
+                                {{ form_errors(formContact.email) }}
+                                {{ form_widget(formContact.email) }}
+                            </div>
+
+                            <div class="form-control m-5">
+                                {{ form_widget(formContact.name) }}
+                            </div>
+
+                            <div class="form-control m-5">
+                                {{ form_widget(formContact.description) }}
+                            </div>
+
+                            <div class="form-control m-5">
+                                <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                            </div>
+                        {{ form_end(formContact) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

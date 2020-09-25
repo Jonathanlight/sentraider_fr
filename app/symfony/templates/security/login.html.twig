@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ 'page.login.description'|trans }} {% endblock %}
+
+{% block stylesheets %}{% endblock %}
+
+{% block body %}
+    <!-- Body -->
+<div class="container">
+    <section class="my-5">
+
+        <div class="row">
+            <div class="col-md-6 mb-lg-0 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="h1-responsive font-weight-bold text-center my-5">{{ 'page.home.header.connexion'|trans }}</h1>
+
+                        {{ form_start(form) }}
+                            <div class="md-form mt-3">
+                                <i class="fas fa-user prefix grey-text"></i>
+                                {{ form_widget(form._username, { attr: {class: 'form-control' }}) }}
+                            </div>
+                            <div class="md-form mt-3">
+                                <i class="fas fa-lock prefix grey-text"></i>
+                                {{ form_widget(form._password, { attr: {class: 'form-control' }}) }}
+                            </div>
+                            <div class="text-center mt-3">
+                                {{ form_widget(form.submit, { attr: {class: 'btn btn-primary btn-block' }}) }}
+                            </div>
+                        {{ form_end(form) }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                &nbsp;
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
