@@ -1,0 +1,80 @@
+{
+    "name": "lexik/jwt-authentication-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle provides JWT authentication for your Symfony REST API",
+    "keywords": ["Symfony", "bundle", "jwt", "jws", "authentication", "api", "rest"],
+    "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeremy Barthe",
+            "email": "j.barthe@lexik.fr",
+            "homepage": "https://github.com/jeremyb"
+        },
+        {
+            "name": "Nicolas Cabot",
+            "email": "n.cabot@lexik.fr",
+            "homepage": "https://github.com/slashfan"
+        },
+        {
+            "name": "Cedric Girard",
+            "email": "c.girard@lexik.fr",
+            "homepage": "https://github.com/cedric-g"
+        },
+        {
+            "name": "Dev Lexik",
+            "email": "dev@lexik.fr",
+            "homepage": "https://github.com/lexik"
+        },
+        {
+            "name": "Robin Chalas",
+            "email": "robin.chalas@gmail.com",
+            "homepage": "https://github.com/chalasr"
+        },
+        {
+            "name": "Lexik Community",
+            "homepage": "https://github.com/lexik/LexikJWTAuthenticationBundle/graphs/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.5|^7.0",
+        "ext-openssl": "*",
+        "lcobucci/jwt": "^3.2",
+        "namshi/jose": "^7.2",
+        "symfony/framework-bundle": "^3.4|^4.0|^5.0",
+        "symfony/security-bundle": "^3.4|^4.0|^5.0"
+    },
+    "require-dev": {
+        "symfony/browser-kit": "^3.4|^4.0|^5.0",
+        "symfony/console": "^3.4|^4.0|^5.0",
+        "symfony/dom-crawler": "^3.4|^4.0|^5.0",
+        "symfony/phpunit-bridge": "^3.4|^4.0|^5.0",
+        "symfony/var-dumper": "^3.4|^4.0|^5.0",
+        "symfony/yaml": "^3.4|^4.0|^5.0"
+    },
+    "suggest": {
+        "gesdinet/jwt-refresh-token-bundle": "Implements a refresh token system over Json Web Tokens in Symfony",
+        "spomky-labs/lexik-jose-bridge": "Provides a JWT Token encoder with encryption support"
+    },
+    "autoload": {
+        "psr-4": { "Lexik\\Bundle\\JWTAuthenticationBundle\\": "" },
+        "exclude-from-classmap": ["/Tests/"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "scripts": {
+        "test": [
+            "vendor/bin/simple-phpunit",
+            "ENCODER=lcobucci vendor/bin/simple-phpunit",
+            "ENCODER=lcobucci ALGORITHM=HS256 vendor/bin/simple-phpunit",
+            "ENCODER=user_id_claim vendor/bin/simple-phpunit",
+            "PROVIDER=lexik_jwt vendor/bin/simple-phpunit"
+        ]
+    }
+}

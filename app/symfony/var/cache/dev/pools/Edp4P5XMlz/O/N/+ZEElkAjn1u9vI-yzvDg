@@ -1,0 +1,22 @@
+<?php //%255BApp%255CEntity%255CCity%2524imageFile%255D%255B1%255D
+
+return [PHP_INT_MAX, static function () { return \Symfony\Component\VarExporter\Internal\Hydrator::hydrate(
+    $o = [
+        clone (\Symfony\Component\VarExporter\Internal\Registry::$prototypes['Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField'] ?? \Symfony\Component\VarExporter\Internal\Registry::p('Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField')),
+    ],
+    null,
+    [
+        'Vich\\UploaderBundle\\Mapping\\Annotation\\UploadableField' => [
+            'mapping' => [
+                'city_images',
+            ],
+            'fileNameProperty' => [
+                'image',
+            ],
+        ],
+    ],
+    [
+        $o[0],
+    ],
+    []
+); }];

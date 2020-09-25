@@ -1,0 +1,6 @@
+Hautelook\AliceBundle\Functional\TestBundle\Entity\Product:
+    product{11..20}:
+        name: Product <current()>
+        price: 10.0
+        description: Awesome @self->name
+        brand: '@brand*'

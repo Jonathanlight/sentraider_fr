@@ -1,0 +1,11 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver: pdo_mysql
+                dbname: hautelook_alice_bundle
+                user: root
+                password: ~
+    orm:
+        auto_mapping: true

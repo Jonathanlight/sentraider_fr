@@ -1,0 +1,76 @@
+{
+    "name": "nelmio/alice",
+    "description": "Expressive fixtures generator",
+    "keywords": ["fixture", "data", "test", "faker"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jordi Boggiano",
+            "email": "j.boggiano@seld.be"
+        },
+        {
+            "name": "Tim Shelburne",
+            "email": "shelburt02@gmail.com"
+        },
+        {
+            "name": "Théo FIDRY",
+            "email": "theo.fidry@gmail.com"
+        }
+    ],
+
+    "require": {
+        "php": "^7.3",
+        "fzaninotto/faker": "^1.6",
+        "myclabs/deep-copy": "^1.5.2",
+        "sebastian/comparator": "^3.0 || ^4.0",
+        "symfony/property-access": "^2.8 || ^3.4 || ^4.0 || ^5.0",
+        "symfony/yaml": "^2.8 || ^3.4 || ^4.0 || ^5.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.1.0",
+        "php-mock/php-mock": "^2.0",
+        "phpspec/prophecy": "^1.6",
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^8.5.4 || ^9.0",
+        "symfony/phpunit-bridge": "^5.0",
+        "symfony/var-dumper": "^3.4 || ^4.0 || ^5.0"
+    },
+    "conflict": {
+        "symfony/framework-bundle": "<3.4"
+    },
+
+    "autoload": {
+        "files": [
+            "src/deep_clone.php"
+        ],
+        "psr-4": {
+            "Nelmio\\Alice\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nelmio\\Alice\\": [
+                "fixtures",
+                "profiling",
+                "tests"
+            ]
+        }
+    },
+    "suggest": {
+        "theofidry/alice-data-fixtures": "Wrapper for Alice to provide a persistence layer."
+    },
+
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false
+        },
+        "branch-alias": {
+            "dev-master": "3.x-dev"
+        }
+    },
+    "config": {
+        "bin-dir": "bin",
+        "sort-packages": true
+    }
+}

@@ -1,0 +1,99 @@
+<?php
+
+namespace EasyCorp\Bundle\EasyAdminBundle\Command;
+
+use Doctrine\Common\Persistence\ManagerRegistry;
+use EasyCorp\Bundle\EasyAdminBundle\Maker\ClassMaker;
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\Filesystem\Filesystem;
+use function Symfony\Component\String\u;
+
+/**
+ * Generates the PHP class needed to define a CRUD controller.
+ *
+ * @author Javier Eguiluz <javier.eguiluz@gmail.com>
+ */
+class MakeCrudControllerCommand extends Command
+{
+    protected static $defaultName = 'make:admin:crud';
+    private $projectDir;
+    private $classMaker;
+    private $doctrine;
+
+    public function __construct(string $projectDir, ClassMaker $classMaker, ManagerRegistry $doctrine, string $name = null)
+    {
+        parent::__construct($name);
+        $this->projectDir = $projectDir;
+        $this->classMaker = $classMaker;
+        $this->doctrine = $doctrine;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        $io = new SymfonyStyle($input, $output);
+        $fs = new Filesystem();
+
+        $doctrineEntitiesFqcn = $this->getAllDoctrineEntitiesFqcn();
+        if (0 === \count($doctrineEntitiesFqcn)) {
+            $io->error('This command generates the CRUD controller of an existing Doctrine entity, but no entities were found in your application. Create some Doctrine entities first and then run this command again.');
+
+            return 1;
+        }
+        $entityFqcn = $io->choice(
+            'Which Doctrine entity are you going to manage with this CRUD controller?',
+            $doctrineEntitiesFqcn
+        );
+        $entityClassName = u($entityFqcn)->afterLast('\\')->toString();
+        $controllerFileNamePattern = sprintf('%s{number}CrudController.php', $entityClassName);
+
+        $projectDir = $this->projectDir;
+        $controllerDir = $io->ask('Which directory do you want to generate the CRUD controller in?', 'src/Controller/Admin/', static function(string $selectedDir) use ($fs, $projectDir) {
+            $absoluteDir = u($selectedDir)->ensureStart($projectDir.DIRECTORY_SEPARATOR);
+            if (!$fs->exists($absoluteDir)) {
+                throw new \RuntimeException('The given directory does not exist. Type in the path of an existing directory relative to your project root (e.g. src/Controller/Admin/)');
+            }
+
+            return $absoluteDir->after($projectDir.DIRECTORY_SEPARATOR)->trimEnd(DIRECTORY_SEPARATOR)->toString();
+        });
+
+        $guessedNamespace = u($controllerDir)->equalsTo('src')
+            ? 'App'
+            : u($controllerDir)->replace('/', ' ')->replace('\\', ' ')->replace('src ', 'app ')->title(true)->replace(' ', '\\');
+        $namespace = $io->ask('Namespace of the generated CRUD controller', $guessedNamespace, static function(string $namespace) {
+            return u($namespace)->replace('/', '\\')->toString();
+        });
+
+        $generatedFilePath = $this->classMaker->make(
+            sprintf('%s/%s', $controllerDir, $controllerFileNamePattern),
+            'crud_controller.tpl',
+            ['entity_fqcn' => $entityFqcn, 'entity_class_name' => $entityClassName, 'namespace' => $namespace]
+        );
+
+        $io->success('Your CRUD controller class has been successfully generated.');
+        $io->text('Next steps:');
+        $io->listing([
+            sprintf('Configure your controller at "%s"', $generatedFilePath),
+            sprintf('Read EasyAdmin docs: https://symfony.com/doc/master/bundles/EasyAdminBundle/index.html'),
+        ]);
+
+        return 0;
+    }
+
+    private function getAllDoctrineEntitiesFqcn(): array
+    {
+        $entitiesFqcn = [];
+        foreach ($this->doctrine->getManagers() as $entityManager) {
+            $classesMetadata = $entityManager->getMetadataFactory()->getAllMetadata();
+            foreach ($classesMetadata as $classMetadata) {
+                $entitiesFqcn[] = $classMetadata->getName();
+            }
+        }
+
+        sort($entitiesFqcn);
+
+        return $entitiesFqcn;
+    }
+}

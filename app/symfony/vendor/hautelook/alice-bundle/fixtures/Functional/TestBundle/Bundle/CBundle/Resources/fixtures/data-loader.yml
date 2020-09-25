@@ -1,0 +1,3 @@
+include:
+    - '@TestABundle/Resources/fixtures/aentity.yml'
+    - '@TestBBundle/Resources/fixtures/bentity.yml'
