@@ -117,6 +117,7 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
             'Symfony\\Bridge\\PhpUnit\\' => 23,
             'Symfony\\Bridge\\Monolog\\' => 23,
             'Symfony\\Bridge\\Doctrine\\' => 24,
+            'Stof\\DoctrineExtensionsBundle\\' => 30,
             'Sensio\\Bundle\\FrameworkExtraBundle\\' => 35,
         ),
         'P' => 
@@ -151,6 +152,10 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
         array (
             'Hautelook\\AliceBundle\\' => 22,
         ),
+        'G' => 
+        array (
+            'Gedmo\\' => 6,
+        ),
         'F' => 
         array (
             'Fig\\Link\\' => 9,
@@ -179,6 +184,10 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
             'Doctrine\\Bundle\\MigrationsBundle\\' => 33,
             'Doctrine\\Bundle\\DoctrineBundle\\' => 31,
             'DeepCopy\\' => 9,
+        ),
+        'B' => 
+        array (
+            'Behat\\Transliterator\\' => 21,
         ),
         'A' => 
         array (
@@ -499,6 +508,10 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
         array (
             0 => __DIR__ . '/..' . '/symfony/doctrine-bridge',
         ),
+        'Stof\\DoctrineExtensionsBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stof/doctrine-extensions-bundle',
+        ),
         'Sensio\\Bundle\\FrameworkExtraBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src',
@@ -570,6 +583,10 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
         'Hautelook\\AliceBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/hautelook/alice-bundle/src',
+        ),
+        'Gedmo\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gedmo/doctrine-extensions/lib/Gedmo',
         ),
         'Fig\\Link\\' => 
         array (
@@ -653,6 +670,10 @@ class ComposerStaticInit6567aa65248586464f0ff3c13117a687
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'Behat\\Transliterator\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/behat/transliterator/src/Behat/Transliterator',
         ),
         'App\\Tests\\' => 
         array (

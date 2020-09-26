@@ -6,27 +6,36 @@ api_platform:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:
         json: ['application/merge-patch+json']
+        jsonapi:  ['application/vnd.api+json']
+        multipart: ['multipart/form-data']
+
+    # Format
+    formats:
+        jsonld:   ['application/ld+json']
+        jsonhal:  ['application/hal+json']
+        jsonapi:  ['application/vnd.api+json']
+        json:     ['application/json']
+        xml:      ['application/xml', 'text/xml']
+        yaml:     ['application/x-yaml']
+        csv:      ['text/csv']
+        html:     ['text/html']
+        image:    ['image/*']
+        multipart: ['multipart/form-data']
 
     # Activation graphQl
     graphql:
         graphiql:
             enabled: true
 
+    #Collection pagination
+    collection:
+        pagination:
+            client_enabled: true
+            enabled_parameter_name: pagination
+
     # Authorization bearer jwt
     swagger:
         versions: [3]
-
-    #Format
-    formats:
-        jsonld:  ['application/ld+json']
-        jsonhal: ['application/hal+json']
-        xml:     ['application/xml', 'text/xml']
-        json:    ['application/json']
-        yaml:    ['application/x-yaml']
-        csv:     ['text/csv']
-        html:    ['text/html']
-
-
         api_keys:
             apiKey:
                 name: Authorization
