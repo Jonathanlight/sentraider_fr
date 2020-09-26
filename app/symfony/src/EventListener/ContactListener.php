@@ -51,7 +51,7 @@ class ContactListener
         if (true === property_exists($entity, 'updatedAt') && $entity instanceof Contact) {
             $entity->setUpdatedAt(new \DateTime());
 
-            dd('postPersist', $entity);
+            //dd('postPersist', $entity);
         }
     }
 
