@@ -1,10 +1,13 @@
-# http://symfony.com/doc/current/book/security.html
 security:
     providers:
         user:
-            entity: { class: App\Entity\User, property: email }
+            entity:
+                class: App\Entity\User
+                property: email
         admin:
-            entity: { class: App\Entity\Admin, property: email }
+            entity:
+                class: App\Entity\Admin
+                property: email
     encoders:
         App\Entity\User:
             algorithm: auto
@@ -12,13 +15,34 @@ security:
         App\Entity\Admin:
             algorithm: auto
             cost: 15
+
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|img|js)/
             security: false
+        login:
+            pattern:  ^/login
+            stateless: true
+            anonymous: true
+            provider: user
+            json_login:
+                check_path: api_login_check
+                username_path: email
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern:   ^/api/v1
+            provider: user
+            stateless: true
+            anonymous: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         admin:
             pattern: ^(/$|/user|/admin_74ze5f|/home/|/home$)
             provider: admin
@@ -31,23 +55,6 @@ security:
             guard:
                 authenticators:
                     - App\Security\Guard\AdminLoginAuthenticator
-        api:
-            pattern: ^/api/v1/
-            stateless: true
-            anonymous: true
-            provider: user
-            guard:
-                authenticators:
-                    - lexik_jwt_authentication.jwt_token_authenticator
-        main:
-            anonymous: true
-            json_login:
-                check_path: /login
-                username_path: email
-                password_path: password
-                success_handler: lexik_jwt_authentication.handler.authentication_success
-                failure_handler: lexik_jwt_authentication.handler.authentication_failure
-
     access_control:
         - { path: ^/admin_74ze5f/login$, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin_74ze5f/, role: ROLE_SUPER_ADMIN }
