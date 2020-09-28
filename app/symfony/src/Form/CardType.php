@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Card;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -42,5 +43,17 @@ class CardType extends AbstractType
                 ],
             ])
         ;
+
+        /*$builder->get('tags')
+            ->addModelTransformer(new CallbackTransformer(
+                function ($stringAsUrl) {
+                    $newFormatUrl = explode('https://', $stringAsUrl);
+                    return $newFormatUrl[1];
+                },
+                function ($urlAsString) {
+                    return 'https://'.$urlAsString;
+                }
+            ))
+        ;*/
     }
 }
