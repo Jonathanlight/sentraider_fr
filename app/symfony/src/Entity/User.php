@@ -74,6 +74,16 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Help::class, mappedBy="user")
+     */
+    private $helps;
+
+    public function __construct()
+    {
+        $this->helps = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
