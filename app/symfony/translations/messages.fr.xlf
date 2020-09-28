@@ -133,5 +133,29 @@
         <target>Description</target>
       </segment>
     </unit>
+    <unit id="1P7RwMG" name="form.product.name">
+      <segment>
+        <source>form.product.name</source>
+        <target>Nom du produit</target>
+      </segment>
+    </unit>
+    <unit id="3KpExl2" name="form.product.poids">
+      <segment>
+        <source>form.product.poids</source>
+        <target>Poids</target>
+      </segment>
+    </unit>
+    <unit id="B2sZe2y" name="form.product.date.expiration">
+      <segment>
+        <source>form.product.date.expiration</source>
+        <target>Date expiration</target>
+      </segment>
+    </unit>
+    <unit id="7rcSHpO" name="form.user.url">
+      <segment>
+        <source>form.user.url</source>
+        <target>Url</target>
+      </segment>
+    </unit>
   </file>
 </xliff>

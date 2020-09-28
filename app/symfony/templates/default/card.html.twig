@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil !{% endblock %}
+
+{% block body %}
+    <!-- Icons Grid -->
+    <div class="m-5">
+        {{ include('composant/flash_messages.html.twig') }}
+    </div>
+
+    <section class="features-icons bg-light text-center">
+        <div class="container">
+            <h1>Formulaire</h1>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="card">
+                        {{ form_start(formCard) }}
+
+                            <div class="form-control mb-3">
+                                {{ form_widget(formCard.email) }}
+                            </div>
+
+                            <div class="form-control mb-3">
+                                {{ form_widget(formCard.url) }}
+                            </div>
+
+                            <div class="form-control">
+                                <button type="submit" class="btn btn-secondary btn-block">Submit</button>
+                            </div>
+
+                        {{ form_end(formCard) }}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Url</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            {% for card in cards %}
+                                <tr>
+                                    <th scope="row"> {{ card.id }} </th>
+                                    <td> {{ card.email }} </td>
+                                    <td> {{ card.url }} </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

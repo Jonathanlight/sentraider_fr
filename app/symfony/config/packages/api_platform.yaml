@@ -12,10 +12,6 @@ api_platform:
         graphiql:
             enabled: true
 
-    # Authorization bearer jwt
-    swagger:
-        versions: [3]
-
     #Format
     formats:
         jsonld:  ['application/ld+json']
@@ -26,7 +22,9 @@ api_platform:
         csv:     ['text/csv']
         html:    ['text/html']
 
-
+    # Authorization bearer jwt
+    swagger:
+        versions: [3]
         api_keys:
             apiKey:
                 name: Authorization
