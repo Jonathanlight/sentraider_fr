@@ -3,7 +3,6 @@
 namespace App\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
-use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @package App\DataTransformer
@@ -22,19 +21,23 @@ class TextToUrlDataTransformer implements DataTransformerInterface
 
         $newFormatUrl = explode('https://', $url);
 
+        if (isset($newUrl[1])) {
+            return $newUrl[1];
+        }
+
         return $newFormatUrl[1];
     }
 
     /**
-     * @param mixed $stringDate
+     * @param mixed $string
      * @return mixed|string|null
      */
-    public function reverseTransform($stringDate)
+    public function reverseTransform($string)
     {
-        if (null === $stringDate) {
+        if (null === $string) {
             return NULL;
         }
 
-        return 'https://'.$stringDate;
+        return 'https://'.$string;
     }
 }

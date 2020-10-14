@@ -18,10 +18,12 @@
                         {{ form_start(formCard) }}
 
                             <div class="form-control mb-3">
+                                {{ form_errors(formCard.email) }}
                                 {{ form_widget(formCard.email) }}
                             </div>
 
                             <div class="form-control mb-3">
+                                {{ form_errors(formCard.url) }}
                                 {{ form_widget(formCard.url) }}
                             </div>
 

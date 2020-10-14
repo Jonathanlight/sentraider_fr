@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use App\Validator\Constraints as MyConstraint;
 
 /**
  * @ApiResource()
@@ -20,6 +21,7 @@ class Card
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @MyConstraint\IsGmail
      */
     private $email;
 

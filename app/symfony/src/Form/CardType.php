@@ -44,14 +44,22 @@ class CardType extends AbstractType
             ])
         ;
 
-        /*$builder->get('tags')
+
+        /*$builder->get('url')
             ->addModelTransformer(new CallbackTransformer(
-                function ($stringAsUrl) {
-                    $newFormatUrl = explode('https://', $stringAsUrl);
-                    return $newFormatUrl[1];
+                //transform
+                function ($urlToSting) {
+                    $newUrl = explode('https://', $urlToSting);
+                    if (isset($newUrl[1])) {
+                        return $newUrl[1];
+                    }
+
+                    return '';
                 },
-                function ($urlAsString) {
-                    return 'https://'.$urlAsString;
+
+                //reverseTransform
+                function ($stringToUrl) {
+                    return 'https://'. $stringToUrl;
                 }
             ))
         ;*/
