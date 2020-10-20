@@ -6,9 +6,9 @@ use http\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class IsGmailValidator extends ConstraintValidator
+class IsYahooValidator extends ConstraintValidator
 {
-    const MAIL_VALIDE = "gmail.com";
+    const MAIL_VALIDE = "yahoo.com";
 
     /**
      * @param mixed $value

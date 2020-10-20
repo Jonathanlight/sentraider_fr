@@ -7,9 +7,9 @@ use \Symfony\Component\Validator\Constraint;
 /**
  * @Annotation
  */
-class IsGmail extends Constraint
+class IsYahoo extends Constraint
 {
-    public string $message = 'Désole, votre email doit etre du format Gmail - {{ string }}';
+    public string $message = 'Désole, votre email doit etre du format Yahoo - {{ string }}';
 
     /**
      * @return string

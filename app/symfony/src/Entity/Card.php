@@ -21,7 +21,7 @@ class Card
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @MyConstraint\IsGmail
+     * @MyConstraint\IsYahoo
      */
     private $email;
 
